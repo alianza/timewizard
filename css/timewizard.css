@@ -1,0 +1,259 @@
+body {
+    font-family: 'Oswald', sans-serif;
+    margin: 0 auto;
+    padding: 0;
+    background: #444;
+    display: block;
+}
+
+.nav ul {
+    list-style: none;
+    background-color: #444;
+    text-align: center;
+    padding: 0;
+}
+
+.nav li {
+    font-size: 1.2em;
+    line-height: 40px;
+    height: 40px;
+    border-bottom: 1px solid #888;
+}
+
+.nav li a {
+    cursor: pointer !important;
+}
+
+
+.nav a {
+    text-decoration: none;
+    color: whitesmoke;
+    display: block;
+    transition: .3s background-color;
+}
+
+.nav a:hover {
+    background-color: #005f5f;
+}
+
+.nav a.active {
+    background-color: #fff;
+    color: #444;
+    cursor: default;
+}
+
+.nav li {
+    width: 200px;
+    border-bottom: none;
+    height: 35px;
+    line-height: 35px;
+    font-size: 1.0em;
+    border-bottom: solid gray;
+}
+
+.nav li {
+    display: inline-block;
+    margin-right: -4px;
+}
+
+.header {
+    background: #444;
+}
+
+.status {
+    color: whitesmoke;
+    background-color: #444;
+    margin: 0px auto;
+    margin-right: 20px;
+    margin-top: 20px;
+    float: right;
+    border: solid 1px gray;
+    padding: 10px;
+}
+
+.form {
+    width: 50%;
+    min-width: 150px;
+    margin: 0px auto;
+    vertical-align: middle;
+    color: whitesmoke;
+    text-align: left;
+}
+
+.field > input {
+    height: 32px;
+    width: 100%;
+    border: none;
+    display: block;
+    color: rgb(33, 33, 33);
+    background-color: #E0E0E0;
+    border-radius: 5px;
+    margin-bottom: 4%;
+    text-align: center;
+}
+
+.field > select {
+    height: 32px;
+    width: 100%;
+    border: none;
+    display: block;
+    color: rgb(33, 33, 33);
+    background-color: #E0E0E0;
+    border-radius: 5px;
+    margin-bottom: 4%;
+    text-align: center;
+}
+
+.field > input:hover {
+    background: #C0C0C0;
+}
+
+.field > input#submit {
+    border: none;
+    border-radius: 5px;
+    background: #808080;
+    color: whitesmoke;
+    width: 100%;
+    margin-bottom: 4%;
+    padding: 0;
+}
+
+.field > input#submit:hover {
+    opacity: 0.6;
+    filter: alpha(opacity=6);
+}
+
+div#footer {
+    color: whitesmoke;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+div#footercontainer {
+    margin-top: 50px;
+}
+
+span {
+    color: whitesmoke;
+}
+
+.logo {
+    width: 75px;
+    padding: 5px;
+}
+
+#melding {
+    color: whitesmoke;
+    text-align: center;
+    margin: 25px auto;
+}
+
+.outputtable {
+    border: 1px solid whitesmoke;
+    color: whitesmoke;
+    text-align: center;
+    margin: 0px auto;
+    vertical-align: middle;
+    width: 50%;
+}
+
+#text {
+    width: 75%;
+    color: whitesmoke;
+    text-align: center;
+    margin: 25px auto;
+    vertical-align: middle;
+    min-width: 200px;
+}
+#table {
+    width: 75%;
+    color: whitesmoke;
+    margin: 25px auto;
+    vertical-align: middle;
+}
+
+table {
+    width: 100%;
+}
+
+/*
+input#input:hover {
+    transition: all .1s;
+    transform: scale(1.1);
+    box-shadow: 0 5px #666;
+}
+*/
+.g-recaptcha {
+    margin: 0 auto;
+    width: fit-content;
+}
+
+input#input, select#input{
+    cursor: pointer;
+    transition: all .20s;
+    box-shadow: 0 9px #666;
+}
+
+input#input:active, select#input:active {
+    cursor: text;
+    background-color: #888888;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px)!important;
+     transition: all .1s;
+}
+
+input#input:focus:hover, select#input:focus:hover {
+    cursor: text !important;
+}
+
+input#input[type=submit]:hover {
+    transition: all .1s;
+    transform: scale(1.05);
+}
+
+input#input[type=submit]:active {
+    transition: all .1s;
+    transform: scale(1.05) translateY(4px)!important;;
+}
+
+input#submit {
+    cursor: pointer;
+    margin-top: 5px;
+    transition: all .20s;
+    box-shadow: 0 10px #666;
+}
+
+
+input#submit:hover {
+    background-color: #888888;
+    box-shadow: 0 8px #666;
+    transform: translateY(2px);
+    transition: all .1s;
+}
+
+input#submit:active {
+    background-color: #888888;
+    box-shadow: 0 5px #666;
+    transform: translateY(5px) !important;
+    transition: all .1s;
+}
+
+div#left {
+    float:left;
+}
+
+div#right {
+    float:right;
+}
+
+select {
+    display: block;
+ 	background: url("https://imagehostingservice.damscommerce.nl/damscommerce/wordpress/selectbox_arrow.png") right center no-repeat;
+ 	color: #444444;
+    appearance: none !important;
+	-webkit-appearance: none !important;
+ 	-moz-appearance: none !important;
+}
