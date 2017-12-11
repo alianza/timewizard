@@ -48,6 +48,6 @@
 
     console.log(sessionStorage.pagetitle);
 
-    document.title = "ProjectSync - " + url;
+    document.title = "TimeWizard - " + url;
 
 })();

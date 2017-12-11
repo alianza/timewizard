@@ -1,6 +1,6 @@
 function loginbarrier() {
 
-    var alert = confirm("U moet ingelogd zijn om deze pagina weer te geven");
+    var alert = confirm("Je moet ingelogd zijn om deze pagina weer te geven");
 
     if (alert) {
 
