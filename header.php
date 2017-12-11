@@ -1,6 +1,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/ico" href="./img/favicon.ico"/>
+    <title>TimeWizard</title>
 </head>
 
 <div class="header">
