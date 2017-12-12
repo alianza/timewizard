@@ -1,5 +1,13 @@
 <?php
 
+require("./lib/PHPMailer/src/PHPMailer.php");
+require("./lib/PHPMailer/src/SMTP.php");
+require("./lib/PHPMailer/src/Exception.php");
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use SMTP\SMTP\SMTP;
+
 if ($_SESSION['L_STATUS'] == 1 || isset($_GET['salt'])) {
 
     if ($_SESSION['L_STATUS'] == 1) {
@@ -27,6 +35,7 @@ if ($_SESSION['L_STATUS'] == 1 || isset($_GET['salt'])) {
             if ($result) {
 
                 $email = $result['email'];
+                $name = $result['voornaam'] . " " . $result['tussenvoegsels'] . " " . $result['achternaam'];
 
             } else {
 
@@ -150,12 +159,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($result) {
 
                 $user_ID = $result['user_ID'];
+                $name = $result['voornaam'] . " " . $result['tussenvoegsels'] . " " . $result['achternaam'];
 
             } else {
 
                 echo("<div id='melding'>");
 
-                echo("Onbekend E-Mail Adres!");
+                    echo("Onbekend E-Mail Adres!");
 
                 echo("</div>");
 
@@ -187,7 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
             $to = $email;
-            $subject = "DamsCommerce TimeWizard - Wachtwoord Heringesteld";
+            $subject = "TimeWizard - Wachtwoord Heringesteld";
 
             $message = "
             <html>
@@ -195,21 +205,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <title>TimeWizard Notification</title>
                 </head>
                 <body>
+                <h1>Wachtwoord heringesteld</h1>
                 <p>Uw wachtwoord is succesvol gewijzigd in</p> <input type='text' value='$wachtwoord'>
+                <br>
+                <p>TimeWizard</p>
                 </body>
                 </html>
                 ";
 
-            // Always set content-type when sending HTML email
-            $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+//              Old sendmail way
+//            mail($to,$subject,$message,$headers);
 
-            // More headers
-            $headers .= 'From: <info@damscommerce.nl>' . "\r\n";
+$mail = new PHPMailer;
+//Tell PHPMailer to use SMTP
+$mail->isSMTP();
+//Enable SMTP debugging
+// 0 = off (for production use)
+// 1 = client messages
+// 2 = client and server messages
+$mail->SMTPDebug = 2;
+//Set the hostname of the mail server
+$mail->Host = 'webmail.damscommerce.nl';
+//Set Port
+$mail->Port = 587 ;
+//Whether to use SMTP authentication
+$mail->SMTPAuth = true;
+//Username to use for SMTP authentication
+$mail->Username = 'info@damscommerce.nl';
+//Password to use for SMTP authentication
+$mail->Password = 'DamsCommerce12';
+//Set who the message is to be sent from
+$mail->setFrom('info@damscommerce.nl', 'DamsCommerce');
+//Set who the message is to be sent to
+$mail->addAddress($to, $name);
+//Set the subject line
+$mail->Subject = $subject;
+// Set email format to HTML
+$mail->isHTML(true);
+//Read an HTML message body from an external file, convert referenced images to embedded,
+//convert HTML into a basic plain-text alternative body
+$mail->Body = $message;
 
-            mail($to,$subject,$message,$headers);
-
-            echo "<div id='melding'>Je Hebt een bevestigingsemail ontvangen!</div>";
+//send the message, check for errors
+if (!$mail->send()) {
+    echo 'Mailer Error: ' . $mail->ErrorInfo;
+} else {
+    echo "<div id='melding'>Uw heeft een bevestigingsemail ontvangen!</div>";
+}
 
             die();
 

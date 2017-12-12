@@ -1,5 +1,13 @@
 <?php
 
+require("./lib/PHPMailer/src/PHPMailer.php");
+require("./lib/PHPMailer/src/SMTP.php");
+require("./lib/PHPMailer/src/Exception.php");
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use SMTP\SMTP\SMTP;
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $errors = array();
@@ -46,6 +54,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $_SESSION['salt'] = $salt;
 
+                $name = $result['voornaam'] . " " . $result['tussenvoegsels'] . " " . $result['achternaam'];
+
                 $to  = $email;
 
                 $subject = 'Wachtwoord-Reset';
@@ -56,25 +66,54 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   <title>Wachtwoord-Reset E-Mail</title>
 </head>
 <body>
+    <h1>Wachtwoord Reset</h1>
   <p>Hieronder de link naar de Wachtwoord-Reset pagina:</p>
-  <table>
-    <tr>
-      <th><a href='timewizard.damscommerce.nl/index.php?page=wachtwoord_wijzigen&salt=$salt'>Wachtwoord vergeten</a></th>
-    </tr>
-  </table>
+  <a href='timewizard.damscommerce.nl/index.php?page=wachtwoord_wijzigen&salt=$salt'>Wachtwoord vergeten</a>
+  <br>
+  <p>TimeWizard</p>
 </body>
-</html>
-";
+</html>";
 
-// To send HTML mail, the Content-type header must be set
-$headers  = 'MIME-Version: 1.0' . "\r\n";
-$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+// OLD Mail it
+//mail($to, $subject, $message, $headers);
 
-// Mail it
-mail($to, $subject, $message, $headers);
 
-                echo("<div id='melding'>Email verzonden.</div>");
+$mail = new PHPMailer;
+//Tell PHPMailer to use SMTP
+$mail->isSMTP();
+//Enable SMTP debugging
+// 0 = off (for production use)
+// 1 = client messages
+// 2 = client and server messages
+$mail->SMTPDebug = 0;
+//Set the hostname of the mail server
+$mail->Host = 'webmail.damscommerce.nl';
+//Set Port
+$mail->Port = 587 ;
+//Whether to use SMTP authentication
+$mail->SMTPAuth = true;
+//Username to use for SMTP authentication
+$mail->Username = 'info@damscommerce.nl';
+//Password to use for SMTP authentication
+$mail->Password = 'DamsCommerce12';
+//Set who the message is to be sent from
+$mail->setFrom('info@damscommerce.nl', 'DamsCommerce');
+//Set who the message is to be sent to
+$mail->addAddress($to, $name);
+//Set the subject line
+$mail->Subject = $subject;
+// Set email format to HTML
+$mail->isHTML(true);
+//Read an HTML message body from an external file, convert referenced images to embedded,
+//convert HTML into a basic plain-text alternative body
+$mail->Body = $message;
 
+//send the message, check for errors
+if (!$mail->send()) {
+    echo 'Mailer Error: ' . $mail->ErrorInfo;
+} else {
+    echo("<div id='melding'>Email verzonden.</div>");
+}
             } else {
 
                 echo("<div id='melding'>Email adres niet bekend!</div>");

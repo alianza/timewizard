@@ -45,7 +45,7 @@
                     <li class="rapport_1"><a id="rapport_1" href="index.php?page=rapport_1">Overzicht uren</a></li>
                     <li class="log_time_choose_project"><a id="log_time_choose_project" href="index.php?page=log_time_choose_project">Log Time</a></li>
                     <li class="explore"><a id="explore" href="index.php?page=explore">Explore Projects & Tasks</a></li>
-                    <li class="change_password"><a id="change_password" href="index.php?page=change_password">Change Passoword</a></li>
+                    <li class="wachtwoord_wijzigen"><a id="wachtwoord_wijzigen" href="index.php?page=wachtwoord_wijzigen">Wachtwoord Wijzigen</a></li>
 
                     <?php
 
