@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($_POST["wachtwoordconfirm"])) {
-     $errors['wachtwoord'] = "wachtwoord herhalen is vereist!";
+     $errors['wachtwoordconfirm'] = "wachtwoord herhalen is vereist!";
    }
     if(!empty($_POST["wachtwoordconfirm"]) ) {
         $wachtwoordconfirm = $_POST["wachtwoordconfirm"];
