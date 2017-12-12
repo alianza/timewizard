@@ -42,7 +42,7 @@
 
         <div class='field'>
 
-        <select id='input' name='taak' onchange='setTextField(this)'>
+        <select id='input' name='taak' onchange='setTextField(this)' required>
          <option value='' disabled selected>Selecteer Taak</option>";
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -58,8 +58,9 @@
 
         <?php
 
-        $output .= "</select><input type='date' id='input'name='datum' placeholder='Datum' value='$current_date'>
-        <input type='text' id='input' onfocus=(this.type='number') name='uren' placeholder='uren' max='24' step='.25' value='1' min='.25'>
+        $output .= "</select><input type='date' id='input'name='datum' placeholder='Datum' value='$current_date' required>
+        <input type='text' id='input' onfocus=(this.type='number') name='uren' placeholder='uren' max='24' step='.25' value='1' min='.25' required>
+        <textarea id='input' name='opmerking' rows='4' cols='50' maxlength='255' required></textarea>
         <input id='input' name='project_id' type='hidden' value='$project_ID'>
         <input id='input' name='projectnaam' type='hidden' value='$projectnaam'>
         <input id='omschrijving' name='omschrijving' type='hidden' value=''>

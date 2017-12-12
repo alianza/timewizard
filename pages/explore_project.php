@@ -1,14 +1,6 @@
     <div class="form">
 
-        <h1>Explore Project</h1>
-
-        <script>
-
-            function setTextField(ddl) {
-            document.getElementById('omschrijving').value = ddl.options[ddl.selectedIndex].text;
-            }
-
-        </script>
+        <h1>Explore Projects</h1>
 
         <?php
 
@@ -20,7 +12,7 @@
                 $project_ID = $_GET['project_ID'];
                 $projectnaam = $_GET['projectnaam'];
 
-        echo ("<p>Taken voor: $projectnaam </p>");
+        echo ("<p>Taken voor project: $projectnaam </p>");
 
     try {
             $sql = "SELECT * FROM `taak`";
@@ -53,12 +45,6 @@
         <?php
 
         $output .= "</select>
-        <input type='text' id='input' onfocus=(this.type='number') name='uren' placeholder='uren' max='24' step='.25' value='1' min='.25'>
-        <input id='input' name='projectid' type='hidden' value='$project_ID'>
-        <input id='input' name='projectnaam' type='hidden' value='$projectnaam'>
-        <input id='omschrijving' name='omschrijving' type='hidden' value=''>
-        <input id='url' name='url' type='hidden' value='$url'>
-        <input id='submit' name='submit' type='submit' value='Log'>
         </div>";
 
         echo ($output);
