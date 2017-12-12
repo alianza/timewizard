@@ -30,7 +30,7 @@
 
                         ?>
 
-                <li class="registreren"><a id="registreren" href="index.php?page=registreren">Registreer</a></li>
+                <li class="damscommerce"><a id="damscommerce" href="damscommerce.nl">About DamsCommerce</a></li>
 
 
 
