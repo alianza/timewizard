@@ -19,6 +19,8 @@ if (isset($_POST["g-recaptcha-response"])) {
 
         <?php
 
+if ($_SESSION['L_STATUS'] == 2) {
+
 $errors = array();
 
 $voornaam = $tussenvoegsels = $achternaam = $geboortedatum = $email = $gebruikersnaam = $wachtwoord = "";
@@ -216,3 +218,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                 </form>
 
             </div>
+
+<?php
+
+    } else {
+
+    loginbarrier();
+
+}
+
+    ?>
