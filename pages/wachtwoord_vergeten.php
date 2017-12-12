@@ -58,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $to  = $email;
 
-                $subject = 'Wachtwoord-Reset';
+                $subject = 'TimeWizard - Wachtwoord-Reset';
 
                 $message = "
 <html>
