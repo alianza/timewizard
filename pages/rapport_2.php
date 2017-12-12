@@ -241,7 +241,7 @@ if (isset($project_ID)) {
 
             echo($output);
 
-            echo("<br><div class='form'><form name='inloggen' action='pages/rapport2-pdf.php' method='post'><div class='field'><input id='input' name='project_ID' type='hidden' value='$project_ID'><input id='submit' name='input' type='submit' value='Druk af!'></div></form></div>");
+            echo("<br><div class='form'><form name='inloggen' action='pages/rapport2-pdf.php' method='post'><div class='field'><textarea name='overzicht' style='display:none;'>$output</textarea><input id='submit' name='input' type='submit' value='Druk af!'></div></form></div>");
 
         }
 
