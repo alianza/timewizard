@@ -1,6 +1,6 @@
     <div class="form">
 
-        <h1>Explore Projects</h1>
+        <h1>Explore Taken</h1>
 
         <?php
 
@@ -40,12 +40,11 @@
 
     }
 
-    ?>
+            if ($stmt->rowCount() == 0) {
+                echo("</div><div id='melding'>Nog geen Taken.</div>");
+            }
 
-        <?php
-
-        $output .= "</select>
-        </div>";
+        $output .= "</div>";
 
         echo ($output);
 
