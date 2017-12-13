@@ -52,6 +52,10 @@ if (isset($_GET["project_ID"])) {
 
     }
 
+            if ($stmt->rowCount() == 0) {
+                echo("</div><div id='melding'>Nog geen Projecten.</div>");
+            }
+
         unset($project_ID);
 
         } else {
