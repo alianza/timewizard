@@ -55,6 +55,10 @@ $user_ID = $_SESSION["L_ID"];
 
     }
 
+            if ($stmt->rowCount() == 0) {
+                echo("</div><div id='melding'>Nog geen Users.</div>");
+            }
+
         unset($user_ID);
 
         } else {
