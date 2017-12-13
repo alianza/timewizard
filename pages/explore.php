@@ -1,4 +1,4 @@
-    <div class="form">
+<div class="form">
 
     <?php
 
@@ -46,6 +46,10 @@
 
     }
 
+            if ($stmt->rowCount() == 0) {
+                echo("</div><div id='melding'>Nog geen Projecten.</div>");
+            }
+
         } else {
 
             loginbarrier();
@@ -54,4 +58,4 @@
 
     ?>
 
-        </div>
+</div>
