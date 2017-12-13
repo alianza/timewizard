@@ -1,6 +1,5 @@
     <head>
-        <meta http-equiv="Content-Type" content="text/html;
-              charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
 
         <?php
@@ -12,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sql']) && isset($_POST
     $query = $_POST['sql'];
     $oudelog_ID = $_POST['ID'];
     $errors = array();
-    $log_ID = $datum = $uren = $taak_ID = $user_ID = $project_ID = "";
+    $log_ID = $datum = $uren = $opmerking = $taak_ID = $user_ID = $project_ID = "";
     $url = $_POST['url'];
 
     if (isset($_POST['verwijder'])) {
@@ -66,6 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      }
    }
 
+    $opmerking = test_input($_POST["opmerking"]);
+
     if (empty($_POST["taak_taak_ID"])) {
      $errors['taak_taak_ID'] = "taak_ID is vereist";
     } else {
@@ -100,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
 
             $stmt = $db->prepare($query);
-            $stmt->execute(array(':newlog_ID' => $log_ID, ':datum' => $datum, ':uren' => $uren, ':taak_ID' => $taak_ID, ':user_ID' => $user_ID, ':project_ID' => $project_ID, ':log_ID' => $oudelog_ID));
+            $stmt->execute(array(':newlog_ID' => $log_ID, ':datum' => $datum, ':uren' => $uren, ':opmerking' => $opmerking, ':taak_ID' => $taak_ID, ':user_ID' => $user_ID, ':project_ID' => $project_ID, ':log_ID' => $oudelog_ID));
 
             echo("<div id='melding'>log met ID: $log_ID bijgewerkt! <br>Ga hier <a href='$url'>Terug</a></div>");
 
