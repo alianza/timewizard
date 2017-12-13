@@ -247,10 +247,14 @@ input#submit:active {
 
 div#left {
     float:left;
+    padding-left: 5px;
+    padding-bottom: 5px;
 }
 
 div#right {
     float:right;
+    padding-right: 5px;
+    padding-bottom: 5px;
 }
 
 select {
