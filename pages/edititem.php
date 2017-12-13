@@ -58,7 +58,7 @@
 
             $kolom = "log_ID";
 
-            $query = "UPDATE `log` SET `log_ID`= :log_ID,`datum`= :datum,`uren`= :uren,`taak_taak_ID`= :taak_ID,`user_user_ID`= :user_ID,`project_project_ID`= :project_ID WHERE `log_ID` = :log_ID";
+            $query = "UPDATE `log` SET `log_ID`= :log_ID,`datum`= :datum,`uren`= :uren, `opmerking`= :opmerking, `taak_taak_ID`= :taak_ID,`user_user_ID`= :user_ID,`project_project_ID`= :project_ID WHERE `log_ID` = :log_ID";
 
         }
 
