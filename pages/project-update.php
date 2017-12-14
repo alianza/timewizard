@@ -54,12 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      $errors['projectnaam'] = "projectnaam is vereist";
    } else {
      $projectnaam = test_input($_POST["projectnaam"]);
-     if (!preg_match("/^[a-zA-Z ]*$/",$projectnaam)) {
-     $errors['projectnaam'] = "Alleen letters en spaties toegestaan!";
-     }
    }
-
-
 }
 
  if (!$errors) {
