@@ -68,7 +68,7 @@
 
             $kolom = "taak_ID";
 
-            $query = "UPDATE `taak` SET `taak_ID`= :taak_ID,`omschrijving`= :omschrijving WHERE `taak_ID` = :taak_ID";
+            $query = "UPDATE `taak` SET `taak_ID`= :newtaak_ID, `project_ID_project_ID`= :project_ID, `omschrijving`= :omschrijving WHERE `taak_ID` = :taak_ID";
 
         }
 
