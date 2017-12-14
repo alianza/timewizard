@@ -24,9 +24,9 @@
         echo ("<p>Wat voor soort taak wilt u loggen voor project: $projectnaam </p>");
 
     try {
-            $sql = "SELECT * FROM `taak`";
+            $sql = "SELECT * FROM `taak` WHERE project_ID_project_ID = :project_ID";
             $stmt = $db->prepare($sql);
-            $stmt->execute();
+            $stmt->execute(array(':project_ID' => $project_ID));
 
         } catch(PDOException $e) {
 
