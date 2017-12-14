@@ -18,10 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sql']) && isset($_POST
 
         try {
 
-            $sql = "DELETE FROM `log` WHERE `log_ID` = $oudelog_ID";
+            $sql = "DELETE FROM `log` WHERE `log_ID` = :oudelog_ID";
 
             $stmt = $db->prepare($sql);
-            $stmt->execute();
+            $stmt->execute(array(':oudelog_ID' => $oudelog_ID));
 
             echo("<div id='melding'>log met ID: $oudelog_ID verwijderd!</div>");
 
