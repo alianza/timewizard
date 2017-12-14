@@ -85,7 +85,7 @@ if (isset($user_ID)) {
 
             $result = false;
 
-            $sql = "SELECT user.voornaam, user.tussenvoegsels, user.achternaam, log.datum, taak.omschrijving, log.uren,  project.projectnaam FROM log INNER JOIN user ON log.user_user_ID = user.user_ID INNER JOIN taak ON log.taak_taak_ID = taak.taak_ID INNER JOIN project ON log.project_project_ID = project.project_ID WHERE log.user_user_ID = :user_ID ORDER BY `projectnaam` ASC, `datum` DESC";
+            $sql = "SELECT user.voornaam, user.tussenvoegsels, user.achternaam, log.datum, taak.omschrijving, log.uren, project.projectnaam FROM log INNER JOIN user ON log.user_user_ID = user.user_ID INNER JOIN taak ON log.taak_taak_ID = taak.taak_ID INNER JOIN project ON log.project_project_ID = project.project_ID WHERE log.user_user_ID = :user_ID ORDER BY `projectnaam` ASC, `datum` DESC";
 
             $stmt = $db->prepare($sql);
             $stmt->execute(array(':user_ID' => $user_ID));
