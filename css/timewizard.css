@@ -279,3 +279,22 @@ select {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
+
+@media all and (max-device-width: 768px) {
+    body {
+        zoom: 2.5;
+    }
+	#footercontainer {
+		zoom: 0.75;
+	}
+	.form {
+		width: 85%;
+	}
+    #table {
+        width: 95%;
+        overflow-x: auto;
+    }
+	.nav li {
+   		 width: 100%;
+	}
+}
