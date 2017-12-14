@@ -51,6 +51,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      }
    }
 
+     if (empty($_POST["project_ID_project_ID"])) {
+     $errors['project_ID'] = "project_ID is vereist";
+    } else {
+     $project_ID = test_input($_POST["project_ID_project_ID"]);
+     if (!is_numeric($project_ID)) {
+     $errors['project_ID'] = "Alleen cijfers toegestaan!";
+     }
+   }
+
    if (empty($_POST["omschrijving"])) {
      $errors['omschrijving'] = "omschrijving is vereist";
    } else {
@@ -68,7 +77,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
 
             $stmt = $db->prepare($query);
-            $stmt->execute(array(':newtaak_ID' => $taak_ID, ':omschrijving' => $omschrijving, ':taak_ID' => $oudetaak_ID));
+//            $stmt->execute(array(':newtaak_ID' => $taak_ID, ':omschrijving' => $omschrijving, ':taak_ID' => $oudetaak_ID));
+            $stmt->execute(array(':newtaak_ID' => $taak_ID, ':project_ID' => $project_ID, ':omschrijving' => $omschrijving, ':taak_ID' => $oudetaak_ID));
 
             echo("<div id='melding'>taak met omschrijving: $omschrijving bijgewerkt! <br>Ga hier <a href='$url'>Terug</a></div>");
 
