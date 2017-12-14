@@ -1,8 +1,8 @@
-    <div class="form">
+<div class="form">
 
-        <h1>Explore Taken</h1>
+    <h1>Explore Taken</h1>
 
-        <?php
+    <?php
 
         if ($_SESSION['L_STATUS'] == 1) {
 
@@ -15,9 +15,9 @@
         echo ("<p>Taken voor project: $projectnaam </p>");
 
     try {
-            $sql = "SELECT * FROM `taak`";
+            $sql = "SELECT * FROM `taak` WHERE project_ID_project_ID = :project_ID";
             $stmt = $db->prepare($sql);
-            $stmt->execute();
+            $stmt->execute(array(':project_ID' => $project_ID));
 
         } catch(PDOException $e) {
 
@@ -64,4 +64,4 @@
 
         ?>
 
-        </div>
+</div>
