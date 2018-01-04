@@ -77,17 +77,19 @@ if (isset($project_ID)) {
 
             $result = false;
 
-            $sql = "SELECT project.projectnaam, user.voornaam, user.tussenvoegsels, user.achternaam, log.datum, taak.omschrijving, log.uren FROM log INNER JOIN user ON log.user_user_ID = user.user_ID INNER JOIN taak ON log.taak_taak_ID = taak.taak_ID INNER JOIN project ON log.project_project_ID = project.project_ID WHERE project.project_ID = :project_ID ORDER BY `achternaam` ASC, `datum` DESC";
+            $sql = "SELECT project.projectnaam, user.voornaam, user.tussenvoegsels, user.achternaam, log.datum, log.opmerking, taak.omschrijving, log.uren FROM log INNER JOIN user ON log.user_user_ID = user.user_ID INNER JOIN taak ON log.taak_taak_ID = taak.taak_ID INNER JOIN project ON log.project_project_ID = project.project_ID WHERE project.project_ID = :project_ID ORDER BY `achternaam` ASC, `datum` DESC";
 
             $stmt = $db->prepare($sql);
             $stmt->execute(array(':project_ID' => $project_ID));
 
         $output = "<div id='table' align='center'><h1>Overzicht</h1>
+                <h3>(Uitgebreid)</h3>
 				<table border='5'>
                 <tr>
                 <th>ProjectNaam</th>
                 <th>user</th>
                 <th>Omschrijving</th>
+                <th>Opmerking</th>
                 <th>Datum</th>
                 <th>uren</th>
                 </tr>";
@@ -123,6 +125,7 @@ if (isset($project_ID)) {
 
         $datum = $row['datum'];
         $omschrijving = $row['omschrijving'];
+        $opmerking = $row['opmerking'];
         $uren = $row['uren'];
         $user = $row['voornaam'] . " " . $row['tussenvoegsels'] . " " . $row['achternaam'];
 
@@ -146,6 +149,7 @@ if (isset($project_ID)) {
                     <td> </td>
                     <td> </td>
                     <td> </td>
+                    <td> </td>
                     </tr>";
 
             $output .= "<tr>
@@ -153,11 +157,13 @@ if (isset($project_ID)) {
                     <td> </td>
                     <td>Subtotaal:</td>
                     <td> </td>
+                    <td> </td>
                     <td>$subtotaal uur</td>
                     </tr>";
 
             $output .= "<tr>
                     <td>&nbsp;</td>
+                    <td> </td>
                     <td> </td>
                     <td> </td>
                     <td> </td>
@@ -178,6 +184,7 @@ if (isset($project_ID)) {
                     <td>$projectnaam</td>
                     <td>$user</td>
                     <td>$omschrijving</td>
+                    <td>$opmerking</td>
                     <td>$datum</td>
                     <td>$uren uur</td>
                     </tr>";
@@ -204,12 +211,14 @@ if (isset($project_ID)) {
                         <td> </td>
                         <td> </td>
                         <td> </td>
+                        <td> </td>
                         </tr>";
 
                 $output .= "<tr>
                         <td> </td>
                         <td> </td>
                         <td>Subtotaal:</td>
+                        <td> </td>
                         <td> </td>
                         <td>$subtotaal uur</td>
                         </tr>";
@@ -220,12 +229,14 @@ if (isset($project_ID)) {
                         <td> </td>
                         <td> </td>
                         <td> </td>
+                        <td> </td>
                         </tr>";
 
                 $output .= "<tr>
                         <td> </td>
                         <td> </td>
                         <td>Totaal:</td>
+                        <td> </td>
                         <td> </td>
                         <td>$totaal uur</td>
                         </tr>";
@@ -247,8 +258,6 @@ if (isset($project_ID)) {
             echo($output);
 
             echo("<br><div class='form'><form name='inloggen' action='pages/rapport2-pdf.php' method='post'><div class='field'><textarea name='overzicht' style='display:none;'>$output</textarea><input id='submit' name='input' type='submit' value='Druk af!'></div></form></div>");
-
-            echo("<br><div class='form'><form name='inloggen' action='index.php?page=rapport_2_ext&project_ID=$project_ID' method='post'><div class='field'></textarea><input id='submit' name='input' type='submit' value='Uitgebreide versie'></div></form></div>");
 
         }
 

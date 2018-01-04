@@ -10,6 +10,9 @@
 <body id="body">
     <?php
 
+        header('Cache-Control: no cache');
+        session_cache_limiter('private_no_expire');
+
         session_start();
 
         if(!isset($_SESSION["L_ID"]) || !isset($_SESSION["L_STATUS"]) || !isset($_SESSION["L_NAME"])) {

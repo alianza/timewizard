@@ -1,7 +1,7 @@
 <?php
 
-DEFINE("DB_USER", "timewizard");
-DEFINE("DB_PASS", "TimeWizard12");
+DEFINE("DB_USER", "root");
+DEFINE("DB_PASS", "root");
 
 try {
 
