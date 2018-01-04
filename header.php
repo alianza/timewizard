@@ -30,9 +30,8 @@
 
                         ?>
 
-                <li class="damscommerce"><a id="damscommerce" href="damscommerce.nl">About DamsCommerce</a></li>
-
-
+				<li class="about"><a id="about" href="index.php?page=about">About TimeWizard</a></li>
+                <li class="damscommerce"><a id="damscommerce" href="http://damscommerce.nl/">About DamsCommerce</a></li>
 
                 <?php
 
@@ -57,6 +56,7 @@
 
                         <li class="rapport_1"><a id="rapport_1" href="index.php?page=rapport_1">Overzicht per User</a></li>
                         <li class="rapport_2"><a id="rapport_2" href="index.php?page=rapport_2">Overzicht per Project</a></li>
+						<li class="explore"><a id="explore" href="index.php?page=explore">Explore Projects & Tasks</a></li>
                         <li class="kiestabel"><a id="kiestabel" href="index.php?page=kiestabel">Database Management</a></li>
 
                         <?php

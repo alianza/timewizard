@@ -82,7 +82,8 @@ if (isset($project_ID)) {
             $stmt = $db->prepare($sql);
             $stmt->execute(array(':project_ID' => $project_ID));
 
-        $output = "<div id='table' align='center'><table border='5'>
+        $output = "<div id='table' align='center'><h1>Overzicht</h1>
+				<table border='5'>
                 <tr>
                 <th>ProjectNaam</th>
                 <th>user</th>

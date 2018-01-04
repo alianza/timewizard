@@ -1,7 +1,7 @@
 <?php
 
 require_once "recaptchalib.php";
-$secret = "6LcwaRgTAAAAAIzbm5JUxUDbPO_HO1D2nybdeI5v";
+$secret = "6LePozwUAAAAAJfvFunHptikbLpbX71bzXdWT8so";
 $response = null;
 $reCaptcha = new ReCaptcha($secret);
 if (isset($_POST["g-recaptcha-response"])) {
@@ -90,7 +90,7 @@ if(isset($_POST["submit"])) {
                     <input type="hidden" name="submit" value="true" />
 
                     <span><?php  if(isset($errors['recaptcha'])) echo $errors['recaptcha'] ?></span>
-                    <div class="g-recaptcha" data-sitekey="6LcwaRgTAAAAAAVPZz9meBmFqeO_LlWKBY_vnNMQ"></div>
+                    <div class="g-recaptcha" data-sitekey="6LePozwUAAAAADOnywJdOfA4iRiBQ15oRuYKvLbq"></div>
 
                     <input type="submit" id="submit" value="inloggen" />
 

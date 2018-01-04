@@ -14,7 +14,7 @@ echo($_SESSION['L_STATUS']);
 
 <p>
 
-TimeWizard is de custom timemanagement/logging service gemaakt door Jan-Willem van Bremen.
+TimeWizard is the custom timemanagement/logging service made by Jan-Willem van Bremen.
 
     </p>
 
@@ -22,27 +22,11 @@ TimeWizard is de custom timemanagement/logging service gemaakt door Jan-Willem v
 
     <h3>DamsCommerce</h3>
 
-    <style>
-.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-}
-
-.embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-    </style>
         <div class='embed-container'>
 
-            <iframe src='https://www.damscommerce.nl' frameborder='0' allowfullscreen></iframe>
+            <iframe src='https://www.damscommerce.nl' frameborder='0'></iframe>
 
     </div>
+
 
 </div>

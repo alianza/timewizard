@@ -1,6 +1,6 @@
 <?php
 require_once "recaptchalib.php";
-$secret = "6LcwaRgTAAAAAIzbm5JUxUDbPO_HO1D2nybdeI5v";
+$secret = "6LePozwUAAAAAJfvFunHptikbLpbX71bzXdWT8so";
 $response = null;
 $reCaptcha = new ReCaptcha($secret);
 if (isset($_POST["g-recaptcha-response"])) {
@@ -28,12 +28,9 @@ $voornaam = $tussenvoegsels = $achternaam = $geboortedatum = $email = $gebruiker
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
    if (empty($_POST["voornaam"])) {
-     $errors['voornaam'] = "Voornaam is vereist";
+     $errors['voornaam'] = "Voornaam is vereist!";
    } else {
      $voornaam = test_input($_POST["voornaam"]);
-     if (!preg_match("/^[a-zA-Z ]*$/",$voornaam)) {
-     $errors['voornaam'] = "Alleen letters en spaties toegestaan!";
-     }
    }
 
     if (empty($_POST["tussenvoegsels"])) {
@@ -46,12 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     }
 
     if (empty($_POST["achternaam"])) {
-     $errors['achternaam'] = "Achternaam is vereist";
+     $errors['achternaam'] = "Achternaam is vereist!";
    } else {
      $achternaam = test_input($_POST["achternaam"]);
-     if (!preg_match("/^[a-zA-Z ]*$/",$achternaam)) {
-     $errors['achternaam'] = "Alleen letters en spaties toegestaan!";
-     }
    }
 
    if (empty($_POST["geboortedatum"])) {
@@ -61,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
    }
 
    if (empty($_POST["email"])) {
-     $errors['email'] = "Email is vereist";
+     $errors['email'] = "Email is vereist!";
    } else {
      $email = test_input($_POST["email"]);
      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -190,17 +184,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
                     <div class="field">
                         <span><?php  if(isset($errors['voornaam'])) echo $errors['voornaam'] ?></span>
-                        <input type="text" id="input" name="voornaam" placeholder="Voornaam">
+                        <input type="text" id="input" name="voornaam" placeholder="Voornaam" value="<?php if(isset($_POST['submit'])) {echo($voornaam);} ?>">
                         <span><?php  if(isset($errors['tussenvoegsels'])) echo $errors['tussenvoegsels'] ?></span>
-                        <input type="text" id="input" name="tussenvoegsels" placeholder="Tussenvoegsels">
+                        <input type="text" id="input" name="tussenvoegsels" placeholder="Tussenvoegsels" value="<?php if(isset($_POST['submit'])) {echo($tussenvoegsels);} ?>">
                         <span><?php  if(isset($errors['achternaam'])) echo $errors['achternaam'] ?></span>
-                        <input type="text" id="input" name="achternaam" placeholder="Achternaam">
+                        <input type="text" id="input" name="achternaam" placeholder="Achternaam" value="<?php if(isset($_POST['submit'])) {echo($achternaam);} ?>">
                         <span><?php  if(isset($errors['geboortedatum'])) echo $errors['geboortedatum'] ?></span>
-                        <input type="text" id="input" onfocus="(this.type='date')" name="geboortedatum" placeholder="Geboortedatum">
+                        <input type="text" id="input" onfocus="(this.type='date')" name="geboortedatum" placeholder="Geboortedatum" value="<?php if(isset($_POST['submit'])) {echo($geboortedatum);} ?>">
                         <span><?php  if(isset($errors['email'])) echo $errors['email'] ?></span>
-                        <input type="email" id="input" name="email" placeholder="Email">
+                        <input type="email" id="input" name="email" placeholder="Email" value="<?php if(isset($_POST['submit'])) {echo($email);} ?>">
                         <span><?php  if(isset($errors['gebruikersnaam'])) echo $errors['gebruikersnaam'] ?></span>
-                        <input type="text" id="input" name="gebruikersnaam" placeholder="Gebruikersnaam">
+                        <input type="text" id="input" name="gebruikersnaam" placeholder="Gebruikersnaam" value="<?php if(isset($_POST['submit'])) {echo($gebruikersnaam);} ?>">
                         <span><?php  if(isset($errors['wachtwoord'])) echo $errors['wachtwoord'] ?></span>
                         <input type="password" id="input" name="wachtwoord" placeholder="Wachtwoord">
                         <input type="password" id="input" name="wachtwoord1" placeholder="Wachtwoord herhalen">
@@ -209,7 +203,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
                     <div class="field">
                         <span><?php  if(isset($errors['recaptcha'])) echo $errors['recaptcha'] ?></span>
-                        <div class="g-recaptcha" data-sitekey="6LcwaRgTAAAAAAVPZz9meBmFqeO_LlWKBY_vnNMQ"></div>
+                        <div class="g-recaptcha" data-sitekey="6LePozwUAAAAADOnywJdOfA4iRiBQ15oRuYKvLbq"></div>
 
                         <input type="submit" name="submit" id="submit" value="Aanmelden">
 

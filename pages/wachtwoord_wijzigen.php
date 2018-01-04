@@ -233,7 +233,7 @@ $mail->SMTPAuth = true;
 //Username to use for SMTP authentication
 $mail->Username = 'info@damscommerce.nl';
 //Password to use for SMTP authentication
-$mail->Password = 'DamsCommerce12';
+$mail->Password = 'DamsCommerce12_INFO';
 //Set who the message is to be sent from
 $mail->setFrom('info@damscommerce.nl', 'DamsCommerce');
 //Set who the message is to be sent to
@@ -264,6 +264,8 @@ if (!$mail->send()) {
 ?>
 
             <div class="form">
+
+				<h1>Wachtwoord Wijzigen</h1>
 
 <form name="inloggen" method="post">
 

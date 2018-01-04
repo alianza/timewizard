@@ -125,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
                     <div class="field">
                         <span><?php  if(isset($errors['gebruikersnaam'])) echo $errors['gebruikersnaam'] ?></span>
-                        <input type="text" id="input" name="gebruikersnaam" placeholder="Gebruikersnaam">
+                        <input type="text" id="input" name="gebruikersnaam" placeholder="Gebruikersnaam" value="<?php if(isset($_POST['submit'])) {echo($gebruikersnaam);} ?>">
                         <span><?php  if(isset($errors['wachtwoord'])) echo $errors['wachtwoord'] ?></span>
                         <input type="password" id="input" name="wachtwoord" placeholder="Wachtwoord">
                         <input type="password" id="input" name="wachtwoord1" placeholder="Wachtwoord herhalen">

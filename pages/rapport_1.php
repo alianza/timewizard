@@ -90,7 +90,7 @@ if (isset($user_ID)) {
             $stmt = $db->prepare($sql);
             $stmt->execute(array(':user_ID' => $user_ID));
 
-            echo("<div id='table' align='center'>");
+            echo("<div id='table' align='center'><h1>Overzicht</h1>");
 
      $output = "<table border='5'>
                 <tr>

@@ -4,7 +4,7 @@
 
     <?php
 
-        if ($_SESSION['L_STATUS'] == 1) {
+        if ($_SESSION['L_STATUS'] == 1 || $_SESSION['L_STATUS'] == 2) {
 
             if (isset($_GET['project_ID']) && isset($_GET['projectnaam'])) {
 
