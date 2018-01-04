@@ -198,6 +198,10 @@ table {
     width: max-content;
 }
 
+#opmerking {
+    max-width: 350px;
+}
+
 /*
 input#input:hover {
     transition: all .1s;

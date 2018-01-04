@@ -184,7 +184,7 @@ if (isset($project_ID)) {
                     <td>$projectnaam</td>
                     <td>$user</td>
                     <td>$omschrijving</td>
-                    <td>$opmerking</td>
+                    <td id='opmerking'>$opmerking</td>
                     <td>$datum</td>
                     <td>$uren uur</td>
                     </tr>";

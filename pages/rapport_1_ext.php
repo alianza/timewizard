@@ -196,7 +196,7 @@ if (isset($user_ID)) {
                     <td>$voornaam $tussenvoegsels $achternaam</td>
                     <td>$projectnaam</td>
                     <td>$omschrijving</td>
-                    <td>$opmerking</td>
+                    <td id='opmerking'>$opmerking</td>
                     <td>$datum</td>
                     <td>$uren uur</td>
                     </tr>";
