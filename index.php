@@ -10,6 +10,9 @@
 <body id="body">
     <?php
 
+        session_cache_limiter('private, must-revalidate');
+        session_cache_expire(60);
+
         session_start();
 
         if(!isset($_SESSION["L_ID"]) || !isset($_SESSION["L_STATUS"]) || !isset($_SESSION["L_NAME"])) {
