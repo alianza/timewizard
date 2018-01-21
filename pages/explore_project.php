@@ -36,7 +36,7 @@
             $omschrijving = $row['omschrijving'];
             $taak_ID = $row['taak_ID'];
 
-        $output .= "<input type='text' id='input' value='$omschrijving' readonly>";
+        $output .= "<input type='text' id='input' value='$omschrijving ID: $taak_ID' readonly disabled>";
 
     }
 
