@@ -36,7 +36,9 @@
 
         <div class='field'>
 
-            <input id='input' name='projectnaam' type='submit' value='$projectnaam'>
+            <input id='input' type='submit' value='$projectnaam ID: $project_ID'>
+
+            <input id='input' name='projectnaam' type='hidden' value='$projectnaam'>
 
             <input id='input' name='project_ID' type='hidden' value='$project_ID'>
 
