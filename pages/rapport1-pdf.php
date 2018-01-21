@@ -10,7 +10,7 @@ $pdf = new PDF_HTML_Table();
 $pdf->AddPage();
 $pdf->Image('../img/logo.png',10,10,-300);
 $pdf->SetFont('Arial','',25);
-$pdf->WriteHTML("<br><br><br><br><br>");
+$pdf->WriteHTML("<br><br><br><br><br><br>");
 $pdf->Write(5,"                                    Rapport Overzicht");
 $pdf->SetFont('Arial','',12);
 $pdf->WriteHTML("<br><br><br><br>");
