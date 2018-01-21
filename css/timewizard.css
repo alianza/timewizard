@@ -198,6 +198,19 @@ table {
     width: max-content;
 }
 
+summary {
+    text-align: center;
+}
+
+details[open] summary ~ * {
+    animation: sweep .5s ease-in-out;
+}
+
+@keyframes sweep {
+    0%    {opacity: 0; margin-left: -80vw; margin-right: 80vw}
+    100%  {opacity: 1; margin-left: 0px; margin-right: 0px}
+}
+
 #opmerking {
     max-width: 350px;
 }
