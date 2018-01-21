@@ -6,6 +6,23 @@ if (isset($_GET["project_ID"])) {
 
     $project_ID = $_GET["project_ID"];
 
+    $endDate = date('Y-m-d');
+    $startDate = strtotime('-7 day', strtotime($endDate));
+    $startDate = date('Y-m-d', $startDate);
+
+    if(isset($_POST["startDate"]) && isset($_POST["endDate"])) {
+        $startDate = $_POST["startDate"];
+        $endDate = $_POST["endDate"];
+    } else if (isset($_GET["startDate"]) && isset($_GET["endDate"])) {
+        $startDate = $_GET["startDate"];
+        $endDate = $_GET["endDate"];
+    }
+
+    $formattedStartDate = date('d-m-Y', strtotime($startDate));
+    $FormattedEndDate = date('d-m-Y', strtotime($endDate));
+
+    $datePicker = "<div class='form'><details><summary>Select data range</summary><form name='inloggen' action='index.php?page=rapport_2_ext&project_ID=$project_ID' method='post'><div class='field'>Start<input type='date' id='input' name='startDate' placeholder='Datum' value='$startDate' required> End<input type='date' id='input' name='endDate' placeholder='Datum' value='$endDate' required><input id='submit' name='input' type='submit' value='Go!'></div></form></details></div>";
+
 } else {
 
     ?>
@@ -77,10 +94,10 @@ if (isset($project_ID)) {
 
             $result = false;
 
-            $sql = "SELECT project.projectnaam, user.voornaam, user.tussenvoegsels, user.achternaam, log.datum, log.opmerking, taak.omschrijving, log.uren FROM log INNER JOIN user ON log.user_user_ID = user.user_ID INNER JOIN taak ON log.taak_taak_ID = taak.taak_ID INNER JOIN project ON log.project_project_ID = project.project_ID WHERE project.project_ID = :project_ID ORDER BY `voornaam` ASC, `datum` DESC";
+            $sql = "SELECT project.projectnaam, user.voornaam, user.tussenvoegsels, user.achternaam, log.datum, log.opmerking, taak.omschrijving, log.uren FROM log INNER JOIN user ON log.user_user_ID = user.user_ID INNER JOIN taak ON log.taak_taak_ID = taak.taak_ID INNER JOIN project ON log.project_project_ID = project.project_ID WHERE project.project_ID = :project_ID AND log.datum BETWEEN :startDate AND :endDate  ORDER BY `voornaam` ASC, `datum` DESC";
 
             $stmt = $db->prepare($sql);
-            $stmt->execute(array(':project_ID' => $project_ID));
+            $stmt->execute(array(':project_ID' => $project_ID, ':startDate' => $startDate, ':endDate' => $endDate));
 
         $output = "<div id='table' align='center'><h1>Overzicht</h1>
                 <h3>(Uitgebreid)</h3>
@@ -247,13 +264,17 @@ if (isset($project_ID)) {
 
      }
 
-        $output .= "</table></div>";
+        $output .= "</table>Showing results from $formattedStartDate to $FormattedEndDate" . "</div>";
 
         if ($result == false) {
 
-             echo("<div id='melding'>Nog geen logs.</div>");
+             echo("<div id='melding'><h1>Overzicht</h1>Nog geen logs.</div>");
+
+             echo($datePicker);
 
         } else {
+
+            echo($datePicker);
 
             echo($output);
 

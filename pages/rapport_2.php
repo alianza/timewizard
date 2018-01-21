@@ -6,6 +6,20 @@ if (isset($_GET["project_ID"])) {
 
     $project_ID = $_GET["project_ID"];
 
+    $endDate = date('Y-m-d');
+    $startDate = strtotime('-7 day', strtotime($endDate));
+    $startDate = date('Y-m-d', $startDate);
+
+    if(isset($_POST["startDate"]) && isset($_POST["endDate"])) {
+        $startDate = $_POST["startDate"];
+        $endDate = $_POST["endDate"];
+    }
+
+    $formattedStartDate = date('d-m-Y', strtotime($startDate));
+    $FormattedEndDate = date('d-m-Y', strtotime($endDate));
+
+    $datePicker = "<div class='form'><details><summary>Select data range</summary><form name='inloggen' action='index.php?page=rapport_2&project_ID=$project_ID' method='post'><div class='field'>Start<input type='date' id='input' name='startDate' placeholder='Datum' value='$startDate' required>End<input type='date' id='input' name='endDate' placeholder='Datum' value='$endDate' required><input id='submit' name='input' type='submit' value='Go!'></div></form></details></div>";
+
 } else {
 
     ?>
@@ -77,10 +91,10 @@ if (isset($project_ID)) {
 
             $result = false;
 
-            $sql = "SELECT project.projectnaam, user.voornaam, user.tussenvoegsels, user.achternaam, log.datum, taak.omschrijving, log.uren FROM log INNER JOIN user ON log.user_user_ID = user.user_ID INNER JOIN taak ON log.taak_taak_ID = taak.taak_ID INNER JOIN project ON log.project_project_ID = project.project_ID WHERE project.project_ID = :project_ID ORDER BY `voornaam` ASC, `datum` DESC";
+            $sql = "SELECT project.projectnaam, user.voornaam, user.tussenvoegsels, user.achternaam, log.datum, taak.omschrijving, log.uren FROM log INNER JOIN user ON log.user_user_ID = user.user_ID INNER JOIN taak ON log.taak_taak_ID = taak.taak_ID INNER JOIN project ON log.project_project_ID = project.project_ID WHERE project.project_ID = :project_ID AND log.datum BETWEEN :startDate AND :endDate  ORDER BY `voornaam` ASC, `datum` DESC";
 
             $stmt = $db->prepare($sql);
-            $stmt->execute(array(':project_ID' => $project_ID));
+            $stmt->execute(array(':project_ID' => $project_ID, ':startDate' => $startDate, ':endDate' => $endDate));
 
         $output = "<div id='table' align='center'><h1>Overzicht</h1>
 				<table border='5'>
@@ -236,19 +250,29 @@ if (isset($project_ID)) {
 
      }
 
-        $output .= "</table></div>";
+        $output .= "</table>";
+
+        if(isset($_POST["startDate"]) && isset($_POST["endDate"])) {
+             $output .= "Showing results from $formattedStartDate to $FormattedEndDate" . "</div>";
+         } else {
+             $output .= "Showing results from $formattedStartDate to $FormattedEndDate (Last 7 days)" . "</div>";
+         }
 
         if ($result == false) {
 
-             echo("<div id='melding'>Nog geen logs.</div>");
+             echo("<div id='melding'><h1>Overzicht</h1>Nog geen logs.</div>");
+
+             echo($datePicker);
 
         } else {
+
+            echo($datePicker);
 
             echo($output);
 
             echo("<br><div class='form'><form name='inloggen' action='pages/rapport2-pdf.php' method='post'><div class='field'><textarea name='overzicht' style='display:none;'>$output</textarea><input id='submit' name='input' type='submit' value='Druk af!'></div></form></div>");
 
-            echo("<br><div class='form'><form name='inloggen' action='index.php?page=rapport_2_ext&project_ID=$project_ID' method='post'><div class='field'></textarea><input id='submit' name='input' type='submit' value='Uitgebreide versie'></div></form></div>");
+            echo("<br><div class='form'><form name='inloggen' action='index.php?page=rapport_2_ext&project_ID=$project_ID&startDate=$startDate&endDate=$endDate' method='post'><div class='field'></textarea><input id='submit' name='input' type='submit' value='Uitgebreide versie'></div></form></div>");
 
         }
 
