@@ -12,21 +12,16 @@ echo($_SESSION['L_STATUS']);
 
     <h1>TimeWizard</h1>
 
-<p>
-
-TimeWizard is the custom timemanagement/logging service made by Jan-Willem van Bremen.
-
-    </p>
+    <p> TimeWizard is the custom timemanagement/logging service made by Jan-Willem van Bremen.</p>
 
     <br>
 
     <h3>DamsCommerce</h3>
 
-        <div class='embed-container'>
+    <div class='embed-container'>
 
-            <iframe src='https://www.damscommerce.nl' frameborder='0'></iframe>
+        <iframe src='https://www.damscommerce.nl' frameborder='0'></iframe>
 
     </div>
-
 
 </div>

@@ -263,18 +263,19 @@ if (!$mail->send()) {
 
 ?>
 
-            <div class="form">
+    <div class="form">
 
-				<h1>Wachtwoord Wijzigen</h1>
+        <h1>Wachtwoord Wijzigen</h1>
 
-<form name="inloggen" method="post">
+        <form name="inloggen" method="post">
 
             <div class="field">
 
-                <p>Voer <?php if (!isset($user_ID)) {echo("uw E-mail adres in en");} ?> een nieuw wachtwoord in en herhaal deze om je wachtwoord opnieuw in te stellen.</p>
+                <p>Voer
+                    <?php if (!isset($user_ID)) {echo("uw E-mail adres in en");} ?> een nieuw wachtwoord in en herhaal deze om je wachtwoord opnieuw in te stellen.</p>
 
                 <span><?php  if(isset($errors['email'])) echo $errors['email'] ?></span>
-                <input id="input" type="email" name="email" placeholder="E-Mail Adres" value="<?php if (isset($user_ID)) {echo($email);} ?>" <?php if (isset($user_ID)) {echo("readonly");} ?> >
+                <input id="input" type="email" name="email" placeholder="E-Mail Adres" value="<?php if (isset($user_ID)) {echo($email);} ?>" <?php if (isset($user_ID)) {echo( "readonly");} ?> >
 
                 <span><?php  if(isset($errors['wachtwoord'])) echo $errors['wachtwoord'] ?></span>
                 <input id="input" type="password" name="wachtwoord" placeholder="Nieuw Wachtwoord">
@@ -284,13 +285,13 @@ if (!$mail->send()) {
 
                 <input id="submit" type="submit" value="Wijzig Wachtwoord">
 
-                </div>
+            </div>
 
         </form>
 
-</div>
+    </div>
 
-<?php
+    <?php
 
     } else {
 
