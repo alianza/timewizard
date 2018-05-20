@@ -1,4 +1,15 @@
 <?php
+
+function file_get_contents_curl($url) {
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_HEADER, 0);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($ch, CURLOPT_URL, $url);
+  $data = curl_exec($ch);
+  curl_close($ch);
+  return $data;
+}
+
 /**
  * This is a PHP library that handles calling reCAPTCHA.
  *    - Documentation and latest version
@@ -85,7 +96,7 @@ class ReCaptcha
     private function _submitHTTPGet($path, $data)
     {
         $req = $this->_encodeQS($data);
-        $response = file_get_contents($path . $req);
+        $response = file_get_contents_curl($path . $req);
         return $response;
     }
     /**
