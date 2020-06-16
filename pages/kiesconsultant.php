@@ -1,26 +1,26 @@
-    <div class="form">
+<div class="form">
 
-        <h1>Consultants</h1>
+    <h1>Consultants</h1>
 
-        <p>Kies de consultant waar u het rapport voor wilt weergeven.</p>
+    <p>Kies de consultant waar u het rapport voor wilt weergeven.</p>
 
     <?php
 
-        if ($_SESSION['L_STATUS'] == 2) {
+    if ($_SESSION['L_STATUS'] == 2) {
 
 
-    try {
+        try {
             $sql = "SELECT * FROM `consultant`";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
 
-        echo("<div id='melding'>");
+            echo("<div id='melding'>");
 
             echo $e->GetMessage();
 
-        echo("</div>");
+            echo("</div>");
 
         }
 
@@ -31,7 +31,7 @@
             $tussenvoegsels = $row['tussenvoegsels'];
             $achternaam = $row['achternaam'];
 
-        echo " <form action='index.php?page=rapport_1' method='post'>
+            echo " <form action='index.php?page=rapport_1' method='post'>
 
         <div class='field'>
 
@@ -41,15 +41,15 @@
 
          </div> </form>";
 
-    }
+        }
 
         unset($consultant_ID);
 
-        } else {
+    } else {
 
-            loginbarrier();
-        }
+        loginbarrier();
+    }
 
     ?>
 
-        </div>
+</div>

@@ -2,62 +2,62 @@
 
 if ($_SESSION['L_STATUS'] !== 0) {
 
-if (isset($_GET["project_ID"])) {
+    if (isset($_GET["project_ID"])) {
 
-    $project_ID = $_GET["project_ID"];
+        $project_ID = $_GET["project_ID"];
 
-    $endDate = date('Y-m-d');
-    $startDate = strtotime('-7 day', strtotime($endDate));
-    $startDate = date('Y-m-d', $startDate);
+        $endDate = date('Y-m-d');
+        $startDate = strtotime('-7 day', strtotime($endDate));
+        $startDate = date('Y-m-d', $startDate);
 
-    if(isset($_POST["startDate"]) && isset($_POST["endDate"])) {
-        $startDate = $_POST["startDate"];
-        $endDate = $_POST["endDate"];
-    } else if (isset($_GET["startDate"]) && isset($_GET["endDate"])) {
-        $startDate = $_GET["startDate"];
-        $endDate = $_GET["endDate"];
-    }
-
-    $formattedStartDate = date('d-m-Y', strtotime($startDate));
-    $FormattedEndDate = date('d-m-Y', strtotime($endDate));
-
-    $datePicker = "<div class='form'><details><summary>Select data range</summary><form name='inloggen' action='index.php?page=rapport_2_ext&project_ID=$project_ID' method='post'><div class='field'>Start<input type='date' id='input' name='startDate' placeholder='Datum' value='$startDate' required> End<input type='date' id='input' name='endDate' placeholder='Datum' value='$endDate' required><input id='submit' name='input' type='submit' value='Go!'></div></form></details></div>";
-
-} else {
-
-    ?>
-
-    <div class="form">
-
-        <h1>Projecten</h1>
-
-        <p>Kies het Project waar u het rapport voor wilt weergeven.</p>
-
-<?php
-
-        if ($_SESSION['L_STATUS'] == 2) {
-
-    try {
-            $sql = "SELECT * FROM `project`";
-            $stmt = $db->prepare($sql);
-            $stmt->execute();
-
-        } catch(PDOException $e) {
-
-            echo("<div id='melding'>");
-
-            echo $e->GetMessage();
-
-            echo("</div>");
-
+        if (isset($_POST["startDate"]) && isset($_POST["endDate"])) {
+            $startDate = $_POST["startDate"];
+            $endDate = $_POST["endDate"];
+        } else if (isset($_GET["startDate"]) && isset($_GET["endDate"])) {
+            $startDate = $_GET["startDate"];
+            $endDate = $_GET["endDate"];
         }
 
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $formattedStartDate = date('d-m-Y', strtotime($startDate));
+        $FormattedEndDate = date('d-m-Y', strtotime($endDate));
 
-            $project_ID = $row['project_ID'];
-            $projectnaam = $row['projectnaam'];
+        $datePicker = "<div class='form'><details><summary>Select data range</summary><form name='inloggen' action='index.php?page=rapport_2_ext&project_ID=$project_ID' method='post'><div class='field'>Start<input type='date' id='input' name='startDate' placeholder='Datum' value='$startDate' required> End<input type='date' id='input' name='endDate' placeholder='Datum' value='$endDate' required><input id='submit' name='input' type='submit' value='Go!'></div></form></details></div>";
 
-        echo " <form action='index.php?page=rapport_2&project_ID=$project_ID' method='post'>
+    } else {
+
+        ?>
+
+        <div class="form">
+
+            <h1>Projecten</h1>
+
+            <p>Kies het Project waar u het rapport voor wilt weergeven.</p>
+
+            <?php
+
+            if ($_SESSION['L_STATUS'] == 2) {
+
+                try {
+                    $sql = "SELECT * FROM `project`";
+                    $stmt = $db->prepare($sql);
+                    $stmt->execute();
+
+                } catch (PDOException $e) {
+
+                    echo("<div id='melding'>");
+
+                    echo $e->GetMessage();
+
+                    echo("</div>");
+
+                }
+
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+                    $project_ID = $row['project_ID'];
+                    $projectnaam = $row['projectnaam'];
+
+                    echo " <form action='index.php?page=rapport_2&project_ID=$project_ID' method='post'>
 
         <div class='field'>
 
@@ -67,30 +67,30 @@ if (isset($_GET["project_ID"])) {
 
          </div> </form>";
 
-    }
+                }
 
-            if ($stmt->rowCount() == 0) {
-                echo("</div><div id='melding'>Nog geen Projecten.</div>");
+                if ($stmt->rowCount() == 0) {
+                    echo("</div><div id='melding'>Nog geen Projecten.</div>");
+                }
+
+                unset($project_ID);
+
+            } else {
+
+                loginbarrier();
+
             }
 
-        unset($project_ID);
-
-        } else {
-
-            loginbarrier();
-
-        }
-
-    ?>
+            ?>
 
         </div>
-<?php
+        <?php
 
-}
+    }
 
-if (isset($project_ID)) {
+    if (isset($project_ID)) {
 
-    try {
+        try {
 
             $result = false;
 
@@ -99,7 +99,7 @@ if (isset($project_ID)) {
             $stmt = $db->prepare($sql);
             $stmt->execute(array(':project_ID' => $project_ID, ':startDate' => $startDate, ':endDate' => $endDate));
 
-        $output = "<div id='table' align='center'><h1>Overzicht</h1>
+            $output = "<div id='table' align='center'><h1>Overzicht</h1>
                 <h3>(Uitgebreid)</h3>
 				<table border='5'>
                 <tr>
@@ -111,7 +111,7 @@ if (isset($project_ID)) {
                 <th>uren</th>
                 </tr>";
 
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
 
             echo("<div id='melding'>");
 
@@ -121,46 +121,46 @@ if (isset($project_ID)) {
 
         }
 
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-        if (!isset($subtotaal)) {
+            if (!isset($subtotaal)) {
 
-            $subtotaal = 0;
-            $totaal = 0;
+                $subtotaal = 0;
+                $totaal = 0;
 
-        }
+            }
 
-        if (isset($user)) {
+            if (isset($user)) {
 
-        $usercheck = $user;
+                $usercheck = $user;
 
-        } else {
+            } else {
 
-            $usercheck = "";
+                $usercheck = "";
 
-        }
+            }
 
-        $datum = $row['datum'];
-        $omschrijving = $row['omschrijving'];
-        $opmerking = $row['opmerking'];
-        $uren = $row['uren'];
-        $user = $row['voornaam'] . " " . $row['tussenvoegsels'] . " " . $row['achternaam'];
+            $datum = $row['datum'];
+            $omschrijving = $row['omschrijving'];
+            $opmerking = $row['opmerking'];
+            $uren = $row['uren'];
+            $user = $row['voornaam'] . " " . $row['tussenvoegsels'] . " " . $row['achternaam'];
 
-        if ($result == false) {
+            if ($result == false) {
 
-            $projectnaam = $row['projectnaam'];
+                $projectnaam = $row['projectnaam'];
 
-        } else {
+            } else {
 
-            $projectnaam = "";
+                $projectnaam = "";
 
-        }
+            }
 
-        if ($usercheck !== $user && $usercheck !== "") {
+            if ($usercheck !== $user && $usercheck !== "") {
 
-            $totaal = $totaal + $subtotaal;
+                $totaal = $totaal + $subtotaal;
 
-            $output .= "<tr>
+                $output .= "<tr>
                     <td>&nbsp;</td>
                     <td> </td>
                     <td> </td>
@@ -169,7 +169,7 @@ if (isset($project_ID)) {
                     <td> </td>
                     </tr>";
 
-            $output .= "<tr>
+                $output .= "<tr>
                     <td> </td>
                     <td> </td>
                     <td>Subtotaal:</td>
@@ -178,7 +178,7 @@ if (isset($project_ID)) {
                     <td>$subtotaal uur</td>
                     </tr>";
 
-            $output .= "<tr>
+                $output .= "<tr>
                     <td>&nbsp;</td>
                     <td> </td>
                     <td> </td>
@@ -187,17 +187,17 @@ if (isset($project_ID)) {
                     <td> </td>
                     </tr>";
 
-            $subtotaal = 0;
+                $subtotaal = 0;
 
-        }
+            }
 
-        if ($user == $usercheck) {
+            if ($user == $usercheck) {
 
-            $user = "";
+                $user = "";
 
-        }
+            }
 
-        $output .= "<tr>
+            $output .= "<tr>
                     <td>$projectnaam</td>
                     <td>$user</td>
                     <td>$omschrijving</td>
@@ -206,23 +206,23 @@ if (isset($project_ID)) {
                     <td>$uren uur</td>
                     </tr>";
 
-        $subtotaal = $subtotaal + $uren;
+            $subtotaal = $subtotaal + $uren;
 
-        $result = true;
+            $result = true;
 
-        if ($user == "") {
+            if ($user == "") {
 
-            $user = $row['voornaam'] . " " . $row['tussenvoegsels'] . " " . $row['achternaam'];
+                $user = $row['voornaam'] . " " . $row['tussenvoegsels'] . " " . $row['achternaam'];
+
+            }
 
         }
-
-    }
 
         if ($result == true) {
 
             $totaal = $totaal + $subtotaal;
 
-             $output .= "<tr>
+            $output .= "<tr>
                         <td>&nbsp;</td>
                         <td> </td>
                         <td> </td>
@@ -231,7 +231,7 @@ if (isset($project_ID)) {
                         <td> </td>
                         </tr>";
 
-                $output .= "<tr>
+            $output .= "<tr>
                         <td> </td>
                         <td> </td>
                         <td>Subtotaal:</td>
@@ -240,7 +240,7 @@ if (isset($project_ID)) {
                         <td>$subtotaal uur</td>
                         </tr>";
 
-                $output .= "<tr>
+            $output .= "<tr>
                         <td>&nbsp;</td>
                         <td> </td>
                         <td> </td>
@@ -249,7 +249,7 @@ if (isset($project_ID)) {
                         <td> </td>
                         </tr>";
 
-                $output .= "<tr>
+            $output .= "<tr>
                         <td> </td>
                         <td> </td>
                         <td>Totaal:</td>
@@ -258,19 +258,18 @@ if (isset($project_ID)) {
                         <td>$totaal uur</td>
                         </tr>";
 
-                $subtotaal = 0;
+            $subtotaal = 0;
 
 
-
-     }
+        }
 
         $output .= "</table>Showing results from $formattedStartDate to $FormattedEndDate" . "</div>";
 
         if ($result == false) {
 
-             echo("<div id='melding'><h1>Overzicht</h1>Nog geen logs.</div>");
+            echo("<div id='melding'><h1>Overzicht</h1>Nog geen logs.</div>");
 
-             echo($datePicker);
+            echo($datePicker);
 
         } else {
 
@@ -282,11 +281,11 @@ if (isset($project_ID)) {
 
         }
 
-}
+    }
 
-        } else {
+} else {
 
-     loginbarrier();
+    loginbarrier();
 
 }
 

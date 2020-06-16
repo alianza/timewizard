@@ -2,48 +2,47 @@
 
 if ($_SESSION['L_STATUS'] !== 0) {
 
-if ($_SESSION["L_STATUS"] == 1) {
+    if ($_SESSION["L_STATUS"] == 1) {
 
-    $user_ID = $_SESSION["L_ID"];
+        $user_ID = $_SESSION["L_ID"];
 
-} else if (!isset($_GET["user_ID"])) {
+    } else if (!isset($_GET["user_ID"])) {
 
-    ?>
+        ?>
 
-    <div class="form">
+        <div class="form">
 
-        <h1>users</h1>
+            <h1>users</h1>
 
-        <p>Kies de user waar u het rapport voor wilt weergeven.</p>
+            <p>Kies de user waar u het rapport voor wilt weergeven.</p>
 
-    <?php
+            <?php
 
-        if ($_SESSION['L_STATUS'] == 2) {
+            if ($_SESSION['L_STATUS'] == 2) {
 
+                try {
+                    $sql = "SELECT * FROM `user`";
+                    $stmt = $db->prepare($sql);
+                    $stmt->execute();
 
-    try {
-            $sql = "SELECT * FROM `user`";
-            $stmt = $db->prepare($sql);
-            $stmt->execute();
+                } catch (PDOException $e) {
 
-        } catch(PDOException $e) {
+                    echo("<div id='melding'>");
 
-        echo("<div id='melding'>");
+                    echo $e->GetMessage();
 
-            echo $e->GetMessage();
+                    echo("</div>");
 
-        echo("</div>");
+                }
 
-        }
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $user_ID = $row['user_ID'];
+                    $voornaam = $row['voornaam'];
+                    $tussenvoegsels = $row['tussenvoegsels'];
+                    $achternaam = $row['achternaam'];
 
-            $user_ID = $row['user_ID'];
-            $voornaam = $row['voornaam'];
-            $tussenvoegsels = $row['tussenvoegsels'];
-            $achternaam = $row['achternaam'];
-
-        echo " <form action='index.php?page=rapport_1&user_ID=$user_ID' method='post'>
+                    echo " <form action='index.php?page=rapport_1&user_ID=$user_ID' method='post'>
 
         <div class='field'>
 
@@ -53,50 +52,50 @@ if ($_SESSION["L_STATUS"] == 1) {
 
          </div> </form>";
 
-    }
+                }
 
-            if ($stmt->rowCount() == 0) {
-                echo("</div><div id='melding'>Nog geen Users.</div>");
+                if ($stmt->rowCount() == 0) {
+                    echo("</div><div id='melding'>Nog geen Users.</div>");
+                }
+
+                unset($user_ID);
+
+            } else {
+
+                loginbarrier();
             }
 
-        unset($user_ID);
-
-        } else {
-
-            loginbarrier();
-        }
-
-    ?>
+            ?>
 
         </div>
 
-<?php
+        <?php
 
-} else {
+    } else {
 
-    $user_ID = $_GET["user_ID"];
+        $user_ID = $_GET["user_ID"];
 
-}
-
-if (isset($user_ID)) {
-
-    $endDate = date('Y-m-d');
-    $startDate = strtotime('-7 day', strtotime($endDate));
-    $startDate = date('Y-m-d', $startDate);
-
-    if(isset($_POST["startDate"]) && isset($_POST["endDate"])) {
-        $startDate = $_POST["startDate"];
-        $endDate = $_POST["endDate"];
     }
 
-    $formattedStartDate = date('d-m-Y', strtotime($startDate));
-    $FormattedEndDate = date('d-m-Y', strtotime($endDate));
+    if (isset($user_ID)) {
 
-    $datePicker = "<div class='form'><details><summary>Select data range</summary><form name='inloggen' action='index.php?page=rapport_1&user_ID=$user_ID' method='post'><div class='field'>Start<input type='date' id='input' name='startDate' placeholder='Datum' value='$startDate' required>End<input type='date' id='input' name='endDate' placeholder='Datum' value='$endDate' required><input id='submit' name='input' type='submit' value='Go!'></div></form></details></div>";
+        $endDate = date('Y-m-d');
+        $startDate = strtotime('-7 day', strtotime($endDate));
+        $startDate = date('Y-m-d', $startDate);
+
+        if (isset($_POST["startDate"]) && isset($_POST["endDate"])) {
+            $startDate = $_POST["startDate"];
+            $endDate = $_POST["endDate"];
+        }
+
+        $formattedStartDate = date('d-m-Y', strtotime($startDate));
+        $FormattedEndDate = date('d-m-Y', strtotime($endDate));
+
+        $datePicker = "<div class='form'><details><summary>Select data range</summary><form name='inloggen' action='index.php?page=rapport_1&user_ID=$user_ID' method='post'><div class='field'>Start<input type='date' id='input' name='startDate' placeholder='Datum' value='$startDate' required>End<input type='date' id='input' name='endDate' placeholder='Datum' value='$endDate' required><input id='submit' name='input' type='submit' value='Go!'></div></form></details></div>";
 
 //    echo("StartDate=" . $startDate . " FormattedStartDate=" . $formattedStartDate . "<br> EndDate=" . $endDate . " FormattedEndDate=" . $FormattedEndDate);
 
- try {
+        try {
 
             $result = false;
 
@@ -105,7 +104,7 @@ if (isset($user_ID)) {
             $stmt = $db->prepare($sql);
             $stmt->execute(array(':user_ID' => $user_ID, ':startDate' => $startDate, ':endDate' => $endDate));
 
-     $output = "<div id='table' align='center'><h1>Overzicht</h1>
+            $output = "<div id='table' align='center'><h1>Overzicht</h1>
                 <table border='5'>
                 <tr>
                 <th>user</th>
@@ -115,7 +114,7 @@ if (isset($user_ID)) {
                 <th>uren</th>
                 </tr>";
 
-     } catch(PDOException $e) {
+        } catch (PDOException $e) {
 
             echo("<div id='melding'>");
 
@@ -125,49 +124,49 @@ if (isset($user_ID)) {
 
         }
 
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-        if (!isset($subtotaal)) {
+            if (!isset($subtotaal)) {
 
-            $subtotaal = 0;
-            $totaal = 0;
+                $subtotaal = 0;
+                $totaal = 0;
 
-        }
+            }
 
-        if (isset($projectnaam)) {
+            if (isset($projectnaam)) {
 
-        $projectnaamcheck = $projectnaam;
+                $projectnaamcheck = $projectnaam;
 
-        } else {
+            } else {
 
-            $projectnaamcheck = "";
+                $projectnaamcheck = "";
 
-        }
+            }
 
-        $datum = $row['datum'];
-        $omschrijving = $row['omschrijving'];
-        $uren = $row['uren'];
-        $projectnaam = $row['projectnaam'];
+            $datum = $row['datum'];
+            $omschrijving = $row['omschrijving'];
+            $uren = $row['uren'];
+            $projectnaam = $row['projectnaam'];
 
-        if ($result == false) {
+            if ($result == false) {
 
-            $voornaam = $row['voornaam'];
-            $tussenvoegsels = $row['tussenvoegsels'];
-            $achternaam = $row['achternaam'];
+                $voornaam = $row['voornaam'];
+                $tussenvoegsels = $row['tussenvoegsels'];
+                $achternaam = $row['achternaam'];
 
-        } else {
+            } else {
 
-            $voornaam = "";
-            $tussenvoegsels = "";
-            $achternaam = "";
+                $voornaam = "";
+                $tussenvoegsels = "";
+                $achternaam = "";
 
-        }
+            }
 
-        if ($projectnaamcheck !== $projectnaam && $projectnaamcheck !== "") {
+            if ($projectnaamcheck !== $projectnaam && $projectnaamcheck !== "") {
 
-            $totaal = $totaal + $subtotaal;
+                $totaal = $totaal + $subtotaal;
 
-            $output .= "<tr>
+                $output .= "<tr>
                     <td>&nbsp;</td>
                     <td> </td>
                     <td> </td>
@@ -175,7 +174,7 @@ if (isset($user_ID)) {
                     <td> </td>
                     </tr>";
 
-            $output .= "<tr>
+                $output .= "<tr>
                     <td> </td>
                     <td> </td>
                     <td>Subtotaal:</td>
@@ -183,7 +182,7 @@ if (isset($user_ID)) {
                     <td>$subtotaal uur</td>
                     </tr>";
 
-            $output .= "<tr>
+                $output .= "<tr>
                     <td>&nbsp;</td>
                     <td> </td>
                     <td> </td>
@@ -191,17 +190,17 @@ if (isset($user_ID)) {
                     <td> </td>
                     </tr>";
 
-            $subtotaal = 0;
+                $subtotaal = 0;
 
-        }
+            }
 
-         if ($projectnaam == $projectnaamcheck) {
+            if ($projectnaam == $projectnaamcheck) {
 
-            $projectnaam = "";
+                $projectnaam = "";
 
-        }
+            }
 
-        $output .= "<tr>
+            $output .= "<tr>
                     <td>$voornaam $tussenvoegsels $achternaam</td>
                     <td>$projectnaam</td>
                     <td>$omschrijving</td>
@@ -209,23 +208,23 @@ if (isset($user_ID)) {
                     <td>$uren uur</td>
                     </tr>";
 
-        $subtotaal = $subtotaal + $uren;
+            $subtotaal = $subtotaal + $uren;
 
-        $result = true;
+            $result = true;
 
-        if ($projectnaam == "") {
+            if ($projectnaam == "") {
 
-            $projectnaam = $row['projectnaam'];
+                $projectnaam = $row['projectnaam'];
+
+            }
 
         }
 
-    }
+        if ($result == true) {
 
-     if ($result == true) {
+            $totaal = $totaal + $subtotaal;
 
-         $totaal = $totaal + $subtotaal;
-
-         $output .= "<tr>
+            $output .= "<tr>
                     <td>&nbsp;</td>
                     <td> </td>
                     <td> </td>
@@ -259,43 +258,39 @@ if (isset($user_ID)) {
 
             $subtotaal = 0;
 
-     }
+        }
 
-     $output .= "</table>";
+        $output .= "</table>";
 
-     if(isset($_POST["startDate"]) && isset($_POST["endDate"])) {
-             $output .= "Showing results from $formattedStartDate to $FormattedEndDate" . "</div>";
-         } else {
-             $output .= "Showing results from $formattedStartDate to $FormattedEndDate (Last 7 days)" . "</div>";
-         }
+        if (isset($_POST["startDate"]) && isset($_POST["endDate"])) {
+            $output .= "Showing results from $formattedStartDate to $FormattedEndDate" . "</div>";
+        } else {
+            $output .= "Showing results from $formattedStartDate to $FormattedEndDate (Last 7 days)" . "</div>";
+        }
 
-     if ($result == false) {
+        if ($result == false) {
 
-         echo("</div><div id='melding'><h1>Overzicht</h1>Nog geen logs.</div>");
+            echo("</div><div id='melding'><h1>Overzicht</h1>Nog geen logs.</div>");
 
-         echo($datePicker);
-
-     } else {
-
-         echo($datePicker);
-
-         echo($output);
-
-         echo("<br><div class='form'><form name='inloggen' action='pages/rapport1-pdf.php' method='post'><div class='field'><textarea name='overzicht' style='display:none;'>$output</textarea><input id='submit' name='input' type='submit' value='Druk af!'></div></form></div>");
-
-         echo("<br><div class='form'><form name='inloggen' action='index.php?page=rapport_1_ext&user_ID=$user_ID&startDate=$startDate&endDate=$endDate' method='post'><div class='field'></textarea><input id='submit' name='input' type='submit' value='Uitgebreide versie'></div></form></div>");
-
-     }
-
-
-
-}
+            echo($datePicker);
 
         } else {
+
+            echo($datePicker);
+
+            echo($output);
+
+            echo("<br><div class='form'><form name='inloggen' action='pages/rapport1-pdf.php' method='post'><div class='field'><textarea name='overzicht' style='display:none;'>$output</textarea><input id='submit' name='input' type='submit' value='Druk af!'></div></form></div>");
+
+            echo("<br><div class='form'><form name='inloggen' action='index.php?page=rapport_1_ext&user_ID=$user_ID&startDate=$startDate&endDate=$endDate' method='post'><div class='field'></textarea><input id='submit' name='input' type='submit' value='Uitgebreide versie'></div></form></div>");
+
+        }
+
+    }
+} else {
 
     loginbarrier();
 
 }
-
 
 ?>

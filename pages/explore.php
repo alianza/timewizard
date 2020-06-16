@@ -2,9 +2,9 @@
 
     <?php
 
-        if ($_SESSION['L_STATUS'] == 1 || $_SESSION['L_STATUS'] == 2) {
+    if ($_SESSION['L_STATUS'] == 1 || $_SESSION['L_STATUS'] == 2) {
 
-            ?>
+        ?>
 
         <h1>Explore Projecten</h1>
 
@@ -12,12 +12,12 @@
 
         <?php
 
-    try {
+        try {
             $sql = "SELECT * FROM `project`";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
 
             echo("<div id='melding'>");
 
@@ -32,7 +32,7 @@
             $projectnaam = $row['projectnaam'];
             $project_ID = $row['project_ID'];
 
-        echo " <form action='index.php?page=explore_project&project_ID=$project_ID&projectnaam=$projectnaam' method='post'>
+            echo " <form action='index.php?page=explore_project&project_ID=$project_ID&projectnaam=$projectnaam' method='post'>
 
         <div class='field'>
 
@@ -46,17 +46,17 @@
 
     </form>";
 
-    }
-
-            if ($stmt->rowCount() == 0) {
-                echo("</div><div id='melding'>Nog geen Projecten.</div>");
-            }
-
-        } else {
-
-            loginbarrier();
-
         }
+
+        if ($stmt->rowCount() == 0) {
+            echo("</div><div id='melding'>Nog geen Projecten.</div>");
+        }
+
+    } else {
+
+        loginbarrier();
+
+    }
 
     ?>
 

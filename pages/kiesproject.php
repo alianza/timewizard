@@ -1,19 +1,19 @@
-    <div class="form">
+<div class="form">
 
-        <h1>Projecten</h1>
+    <h1>Projecten</h1>
 
-        <p>Kies het Project waar u het rapport voor wilt weergeven.</p>
+    <p>Kies het Project waar u het rapport voor wilt weergeven.</p>
 
     <?php
 
-        if ($_SESSION['L_STATUS'] == 2) {
+    if ($_SESSION['L_STATUS'] == 2) {
 
-    try {
+        try {
             $sql = "SELECT * FROM `project`";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
 
             echo("<div id='melding'>");
 
@@ -28,7 +28,7 @@
             $project_ID = $row['project_ID'];
             $projectnaam = $row['projectnaam'];
 
-        echo " <form action='index.php?page=rapport_2' method='post'>
+            echo " <form action='index.php?page=rapport_2' method='post'>
 
         <div class='field'>
 
@@ -38,16 +38,16 @@
 
          </div> </form>";
 
-    }
+        }
 
         unset($project_ID);
 
-        } else {
+    } else {
 
-            loginbarrier();
+        loginbarrier();
 
-        }
+    }
 
     ?>
 
-        </div>
+</div>

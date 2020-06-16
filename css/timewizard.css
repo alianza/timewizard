@@ -122,19 +122,19 @@ body {
 }
 
 .embed-container {
-	position: relative;
-	padding-bottom: 56.25%;
-	height: 0;
-	overflow: hidden;
-	max-width: 100%;
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
 }
 
 .embed-container iframe, .embed-container object, .embed-container embed {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 div#footer {
@@ -145,7 +145,7 @@ div#footer {
     text-align: center;
     overflow: hidden;
     padding-top: 2px;
-	background-color: #444444;
+    background-color: #444444;
     box-shadow: 0 -5px 5px 0 #444444;
 }
 
@@ -185,6 +185,7 @@ span {
     vertical-align: middle;
     min-width: 200px;
 }
+
 #table {
     width: 75%;
     color: whitesmoke;
@@ -206,8 +207,15 @@ details[open] summary ~ * {
 }
 
 @keyframes sweep {
-    0%    {opacity: 0; margin-left: -80vw; margin-right: 80vw}
-    100%  {opacity: 1; margin-left: 0; margin-right: 0
+    0% {
+        opacity: 0;
+        margin-left: -80vw;
+        margin-right: 80vw
+    }
+    100% {
+        opacity: 1;
+        margin-left: 0;
+        margin-right: 0
     }
 }
 
@@ -231,7 +239,7 @@ textarea {
     width: fit-content;
 }
 
-input#input, select#input, textarea#input{
+input#input, select#input, textarea#input {
     cursor: pointer;
     transition: all .20s;
     box-shadow: 0 9px #666;
@@ -241,7 +249,7 @@ input#input:active, select#input:active, textarea#input:active {
     cursor: text;
     background-color: #888888;
     box-shadow: 0 5px #666;
-    transform: translateY(4px)!important;
+    transform: translateY(4px) !important;
     transition: all .1s;
 }
 
@@ -256,7 +264,7 @@ input#input[type=submit]:hover {
 
 input#input[type=submit]:active {
     transition: all .1s;
-    transform: scale(1.05) translateY(4px)!important;;
+    transform: scale(1.05) translateY(4px) !important;;
 }
 
 input#submit {
@@ -282,24 +290,24 @@ input#submit:active {
 }
 
 div#left {
-    float:left;
+    float: left;
     padding-left: 5px;
     padding-bottom: 5px;
 }
 
 div#right {
-    float:right;
+    float: right;
     padding-right: 5px;
     padding-bottom: 5px;
 }
 
 select {
     display: block;
- 	background: url("https://imagehostingservice.damscommerce.nl/damscommerce/wordpress/selectbox_arrow.png") right center no-repeat;
- 	color: #444444;
+    background: url("https://imagehostingservice.damscommerce.nl/damscommerce/wordpress/selectbox_arrow.png") right center no-repeat;
+    color: #444444;
     appearance: none !important;
-	-webkit-appearance: none !important;
- 	-moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
 }
 
 /* Custom scrollbar */
@@ -308,55 +316,60 @@ select {
 }
 
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
 }
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-	transform: scale(2);
-	transform-origin: 150% 50%;
+    transform: scale(2);
+    transform-origin: 150% 50%;
 }
 
 input[type=date]::-webkit-inner-spin-button,
 input[type=date]::-webkit-outer-spin-button {
-	transform: scale(1.5);
-	transform-origin: 350% -10%;
+    transform: scale(1.5);
+    transform-origin: 350% -10%;
 }
 
 [type="date"]::-webkit-calendar-picker-indicator {
-	transform: scale(1.5);
-	transform-origin: 150% 50%;
+    transform: scale(1.5);
+    transform-origin: 150% 50%;
 }
 
 @media all and (max-device-width: 768px) {
     body {
         zoom: 2.5;
     }
-	#text {
-		width: 85%
-	}
-	#footercontainer {
-		zoom: 0.75;
-	}
-	.form {
-		width: 85%;
-	}
+
+    #text {
+        width: 85%
+    }
+
+    #footercontainer {
+        zoom: 0.75;
+    }
+
+    .form {
+        width: 85%;
+    }
+
     #table {
         width: 95%;
     }
-	.nav li {
-   		 width: 100%;
-	}
+
+    .nav li {
+        width: 100%;
+    }
 }
 
 @-moz-document url-prefix() {
     select#input:active {
         transform: none !important;
-		box-shadow: 0 9px #666;
+        box-shadow: 0 9px #666;
     }
 }

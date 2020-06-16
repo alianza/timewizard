@@ -1,10 +1,10 @@
 (function menu_highlight() {
 
-    url = window.location.href;
+    let url = window.location.href;
 
     url = url.substr(url.indexOf('=') + 1, url.length);
 
-    element = document.getElementById(url);
+    let element = document.getElementById(url);
 
     if (typeof (Storage) !== "undefined") {
 
@@ -24,7 +24,7 @@
 
             if (element) {
 
-            document.getElementById(sessionStorage.pagetitle).setAttribute("class", "active");
+                document.getElementById(sessionStorage.pagetitle).setAttribute("class", "active");
 
             }
 

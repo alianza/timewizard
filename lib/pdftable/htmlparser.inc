@@ -64,7 +64,7 @@ class HtmlParser {
     private $BOE_ARRAY;
     private $B_ARRAY;
     private $BOS_ARRAY;
-    
+
     /**
      * Constructor.
      * Constructs an HtmlParser instance with
@@ -114,7 +114,7 @@ class HtmlParser {
             $name = $this->skipToBlanksInTag();
             $this->iNodeType = NODE_TYPE_ENDELEMENT;
             $this->iNodeName = $name;
-            $this->iNodeValue = "";            
+            $this->iNodeValue = "";
             $this->skipEndOfTag();
             return true;
         }
@@ -127,10 +127,10 @@ class HtmlParser {
                         $this->iNodeType = NODE_TYPE_COMMENT;
                         $this->iNodeName = "Comment";
                         $this->iNodeValue = "<" . $name . ">";
-                        $comment = true;                        
+                        $comment = true;
                     }
                     else {
-                        $rest = $this->skipToStringInTag ("-->");    
+                        $rest = $this->skipToStringInTag ("-->");
                         if ($rest != "") {
                             $this->iNodeType = NODE_TYPE_COMMENT;
                             $this->iNodeName = "Comment";
@@ -169,13 +169,13 @@ class HtmlParser {
                 }
         }
         $this->skipEndOfTag();
-        return true;            
+        return true;
     }
 
     function isValidTagIdentifier ($name) {
         return preg_match ("/^[A-Za-z0-9_\\-]+$/", $name);
     }
-    
+
     function skipBlanksInTag() {
         return "" != ($this->skipInTag ($this->B_ARRAY));
     }
@@ -208,7 +208,7 @@ class HtmlParser {
             $this->skipMaxInTag ("'", 1);
             $value = $this->skipToInTag ("'");
             $this->skipMaxInTag ("'", 1);
-        }                
+        }
         else {
             $value = $this->skipToBlanksInTag();
         }
@@ -322,7 +322,7 @@ class HtmlParser {
             $sb .= $ch;
             $this->moveNext();
         }
-        return $sb;             
+        return $sb;
     }
 
     /**
@@ -343,7 +343,7 @@ class HtmlParser {
     }
 }
 
-function HtmlParser_ForFile ($fileName) { 
+function HtmlParser_ForFile ($fileName) {
     return HtmlParser_ForURL($fileName);
 }
 

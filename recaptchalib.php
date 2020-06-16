@@ -1,13 +1,14 @@
 <?php
 
-function file_get_contents_curl($url) {
-  $ch = curl_init();
-  curl_setopt($ch, CURLOPT_HEADER, 0);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-  curl_setopt($ch, CURLOPT_URL, $url);
-  $data = curl_exec($ch);
-  curl_close($ch);
-  return $data;
+function file_get_contents_curl($url)
+{
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    return $data;
 }
 
 /**
@@ -40,6 +41,7 @@ function file_get_contents_curl($url) {
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 /**
  * A ReCaptchaResponse is returned from checkAnswer().
  */
@@ -48,6 +50,7 @@ class ReCaptchaResponse
     public $success;
     public $errorCodes;
 }
+
 class ReCaptcha
 {
     private static $_signupUrl = "https://www.google.com/recaptcha/admin";
@@ -55,6 +58,7 @@ class ReCaptcha
         "https://www.google.com/recaptcha/api/siteverify?";
     private $_secret;
     private static $_version = "php_1.0";
+
     /**
      * Constructor.
      *
@@ -66,8 +70,9 @@ class ReCaptcha
             die("To use reCAPTCHA you must get an API key from <a href='"
                 . self::$_signupUrl . "'>" . self::$_signupUrl . "</a>");
         }
-        $this->_secret=$secret;
+        $this->_secret = $secret;
     }
+
     /**
      * Encodes the given data into a query string format.
      *
@@ -82,14 +87,15 @@ class ReCaptcha
             $req .= $key . '=' . urlencode(stripslashes($value)) . '&';
         }
         // Cut the last '&'
-        $req=substr($req, 0, strlen($req)-1);
+        $req = substr($req, 0, strlen($req) - 1);
         return $req;
     }
+
     /**
      * Submits an HTTP GET to a reCAPTCHA server.
      *
      * @param string $path url path to recaptcha server.
-     * @param array  $data array of parameters to be sent.
+     * @param array $data array of parameters to be sent.
      *
      * @return array response
      */
@@ -99,12 +105,13 @@ class ReCaptcha
         $response = file_get_contents_curl($path . $req);
         return $response;
     }
+
     /**
      * Calls the reCAPTCHA siteverify API to verify whether the user passes
      * CAPTCHA test.
      *
-     * @param string $remoteIp   IP address of end user.
-     * @param string $response   response string from recaptcha verification.
+     * @param string $remoteIp IP address of end user.
+     * @param string $response response string from recaptcha verification.
      *
      * @return ReCaptchaResponse
      */
@@ -119,7 +126,7 @@ class ReCaptcha
         }
         $getResponse = $this->_submitHttpGet(
             self::$_siteVerifyUrl,
-            array (
+            array(
                 'secret' => $this->_secret,
                 'remoteip' => $remoteIp,
                 'v' => self::$_version,
@@ -136,4 +143,5 @@ class ReCaptcha
         return $recaptchaResponse;
     }
 }
+
 ?>

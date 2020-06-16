@@ -11,29 +11,27 @@ if (isset($_POST["g-recaptcha-response"])) {
     );
 }
 
-if(isset($_POST["submit"])) {
+if (isset($_POST["submit"])) {
 
     $errors = array();
     $gebruikersnaam = htmlspecialchars($_POST["gebruikersnaam"]);
     $wachtwoord = $_POST["wachtwoord"];
 
-    if(empty($gebruikersnaam)) {
+    if (empty($gebruikersnaam)) {
         $errors["gebruikersnaam"] = "U heeft geen gebruikersnaam ingevuld.<br>";
     }
 
-    if(empty($wachtwoord)) {
+    if (empty($wachtwoord)) {
         $errors["wachtwoord"] = "U heeft geen wachtwoord ingevuld.<br>";
     }
 
     $hwachtwoord = md5($wachtwoord);
 
-    if ($response != null && $response->success) {
-
-    } else {
+    if ($response == null || !$response->success) {
         $errors["recaptcha"] = "Incorrecte recaptcha input<br>";
     }
 
-    if(!$errors) {
+    if (!$errors) {
 
         try {
 
@@ -43,7 +41,7 @@ if(isset($_POST["submit"])) {
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if($result) {
+            if ($result) {
 
                 $_SESSION['L_ID'] = $result['admin_ID'];
                 $_SESSION['L_NAME'] = $result['gebruikersnaam'];
@@ -78,24 +76,24 @@ if(isset($_POST["submit"])) {
 
     <h2>Inloggen Administrator</h2>
 
-        <form name="inloggen" method="POST" enctype="multipart/form-data">
+    <form name="inloggen" method="POST" enctype="multipart/form-data">
 
-            <div class="field">
+        <div class="field">
 
-                    <span><?php  if(isset($errors['gebruikersnaam'])) echo $errors['gebruikersnaam'] ?></span>
-                    <input type="text" id="input" name="gebruikersnaam" placeholder="Gebruikersnaam" />
+            <span><?php if (isset($errors['gebruikersnaam'])) echo $errors['gebruikersnaam'] ?></span>
+            <input type="text" id="input" name="gebruikersnaam" placeholder="Gebruikersnaam"/>
 
-                    <span><?php  if(isset($errors['wachtwoord'])) echo $errors['wachtwoord'] ?></span>
-                    <input type="password" id="input" name="wachtwoord" placeholder="Wachtwoord" />
+            <span><?php if (isset($errors['wachtwoord'])) echo $errors['wachtwoord'] ?></span>
+            <input type="password" id="input" name="wachtwoord" placeholder="Wachtwoord"/>
 
-                    <span><?php  if(isset($errors['recaptcha'])) echo $errors['recaptcha'] ?></span>
-                    <div class="g-recaptcha" data-sitekey="6LePozwUAAAAADOnywJdOfA4iRiBQ15oRuYKvLbq"></div>
+            <span><?php if (isset($errors['recaptcha'])) echo $errors['recaptcha'] ?></span>
+            <div class="g-recaptcha" data-sitekey="6LePozwUAAAAADOnywJdOfA4iRiBQ15oRuYKvLbq"></div>
 
-                    <input type="hidden" name="submit" value="true" />
+            <input type="hidden" name="submit" value="true"/>
 
-                    <input type="submit" id="submit" value="inloggen" />
+            <input type="submit" id="submit" value="inloggen"/>
 
-            </div>
+        </div>
 
     </form>
 

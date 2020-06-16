@@ -1,10 +1,10 @@
-    <div class="form">
+<div class="form">
 
     <?php
 
-        if ($_SESSION['L_STATUS'] == 2) {
+    if ($_SESSION['L_STATUS'] == 2) {
 
-            ?>
+        ?>
 
         <h1>Tabellen</h1>
 
@@ -13,16 +13,18 @@
         <?php
 
 
-    try {
-            $sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'timewizard'";
+        try {
+            $sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = '".constant('DB_NAME')."'";
             $stmt = $db->prepare($sql);
             $stmt->execute();
 
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
 
             echo("<div id='melding'>");
 
             echo $e->GetMessage();
+
+            echo $sql;
 
             echo("</div>");
 
@@ -32,7 +34,7 @@
 
             $tabelnaam = $row['TABLE_NAME'];
 
-        echo " <form action='index.php?page=kiesitem&tabelnaam=$tabelnaam' method='post'>
+            echo " <form action='index.php?page=kiesitem&tabelnaam=$tabelnaam' method='post'>
 
         <div class='field'>
 
@@ -40,13 +42,13 @@
 
          </div> </form>";
 
-    }
-
-        } else {
-
-            loginbarrier();
         }
+
+    } else {
+
+        loginbarrier();
+    }
 
     ?>
 
-        </div>
+</div>
