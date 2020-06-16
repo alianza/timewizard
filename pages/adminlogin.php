@@ -1,7 +1,7 @@
 <?php
 
 require_once "recaptchalib.php";
-$secret = "6LePozwUAAAAAJfvFunHptikbLpbX71bzXdWT8so";
+$secret = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe";
 $response = null;
 $reCaptcha = new ReCaptcha($secret);
 if (isset($_POST["g-recaptcha-response"])) {
