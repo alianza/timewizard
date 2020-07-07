@@ -4,7 +4,6 @@ require("./lib/PHPMailer/src/PHPMailer.php");
 require("./lib/PHPMailer/src/SMTP.php");
 require("./lib/PHPMailer/src/Exception.php");
 
-use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use SMTP\SMTP\SMTP;
 
